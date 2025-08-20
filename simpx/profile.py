@@ -247,9 +247,10 @@ class ProfileManager:
             auto_reply = None
             if self.current_profile.auto_accept_message:
                 auto_reply = {"type": "text", "text": self.current_profile.auto_accept_message}
-            
+
+            # accept_incognito=True raises an exception because short addresses are automatically created and apparently not compatible. Settings accept_incognito to False still auto accept incognito profiles. If this causes a regression, please report it.
             await self.client.enable_address_auto_accept(
-                accept_incognito=True,
+                accept_incognito=False,
                 auto_reply=auto_reply
             )
         
